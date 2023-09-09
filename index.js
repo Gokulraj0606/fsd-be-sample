@@ -26,26 +26,26 @@ app.get('/', (req, res) => {
 })
 
 //db.(dbname).collection(name).find()
-app.get('/products', async (req, res) => {
+app.get('/users', async (req, res) => {
     const product = await client.db("fsd-k-demo").collection("products").find().toArray()
     res.send(product)
 })
 
-app.get('/products/:id', async (req, res) => {
+app.get('/users/:id', async (req, res) => {
     const { id } = req.params
     const product = await client.db("fsd-k-demo").collection("products").findOne({ id: id })
     res.send(product)
 })
 
 //delete same like get method by id
-app.delete('/products/:id', async (req, res) => {
+app.delete('/users/:id', async (req, res) => {
     const { id } = req.params
     const product = await client.db("fsd-k-demo").collection("products").deleteOne({ id: id })
     res.send(product)
 })
 
 // post method
-app.post('/products', async (req, res) => {
+app.post('/users', async (req, res) => {
     const newProduct = req.body
     const result = await client.db("fsd-k-demo").collection("products").insertMany(newProduct)
     res.send(result)
@@ -53,7 +53,7 @@ app.post('/products', async (req, res) => {
 
 // put method -- is combain of get medhod by id & post method
 //update method we use set operators
-app.put('/products/:id', async (req, res) => {
+app.put('/users/:id', async (req, res) => {
     const { id } = req.params
     const updatedProduct = req.body
     const result = await client.db("fsd-k-demo").collection("products").updateOne({ id: id }, { $set: updatedProduct })
